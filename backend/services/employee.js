@@ -56,10 +56,7 @@ const removeEmployeeById = async (employeeId, res) => {
 
 const updateEmployeeById = async (filter, updateData, res) => {
     try {
-        console.log(filter, 'filterfilterfilterfilter');
         const employee = await Employees.updateOne(filter, updateData);
-        console.log(employee, 'eeeeeeeeeee');
-
         return employee;
     } catch (err) {
         console.log(err.message);

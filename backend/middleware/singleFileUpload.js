@@ -15,7 +15,6 @@ var upload = multer({ storage: storage }).single('profile_pic');
 module.exports = function (req, res, next) {
     upload(req, res, (err) => {
        if (err) {
-           console.log(err,"prt");
           res.status(400).send("Something went wrong!");
        }
        if (req.file) {

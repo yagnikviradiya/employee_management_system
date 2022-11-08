@@ -6,7 +6,6 @@ const createEmployee = async (req, res) => {
         req.body.profile_pic=req.fileurl
         let employee = await employeeServices.getEmployeeByKey({ is_deleted: false, email: req.body.email });
         if (employee) {
-            console.log(req?.fileurl,req.body,'req.fileurl');
             return res.status(200).json({
                 success: false,
                 data: null,
