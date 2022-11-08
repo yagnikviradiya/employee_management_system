@@ -7,7 +7,7 @@ const createEmployee = async (req, res) => {
         let employee = await employeeServices.getEmployeeByKey({ is_deleted: false, email: req.body.email });
         if (employee) {
             console.log(req?.fileurl,req.body,'req.fileurl');
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 data: null,
                 message: "employee already exist"
@@ -20,7 +20,7 @@ const createEmployee = async (req, res) => {
                 data: createEmployee,
                 message: "employee created"
             });
-        return res.status(400).json({
+        return res.status(200).json({
             success: false,
             data: null,
             message: "error while creating employee"
@@ -52,14 +52,14 @@ const updateEmployeeById = async (req, res) => {
                     message: "employee updated"
                 });
             } else {
-                res.status(400).json({
+                res.status(200).json({
                     success: false,
                     data: null,
                     message: 'employee not updated'
                 })
             }
         } else {
-            res.status(400).json({
+            res.status(200).json({
                 success: false,
                 data: null,
                 message: 'employee id required'
@@ -113,7 +113,7 @@ const getEmployeeById = async (req, res) => {
                 });
             }
         } else {
-            res.status(400).json({
+            res.status(200).json({
                 success: false,
                 data: null,
                 message: 'employee id required'

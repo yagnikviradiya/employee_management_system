@@ -6,8 +6,6 @@ const router = express.Router()
 // middleware
 const validator = require('../middleware/validator');
 const singleFileUpload = require('../middleware/singleFileUpload');
-
-
 // for get all employees
 router.get('/getEmployees', getEmployees)
 // for create new employee

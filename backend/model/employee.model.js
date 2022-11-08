@@ -26,7 +26,7 @@ const EmployeeSchema = new mongoose.Schema({
         require: true
     },
     hobbies: {
-        type: String,
+        type: Array,
         require: true
     },
     is_deleted: {
