@@ -22,17 +22,25 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-
+import SearchAppBar from '../components/SearchAppBar';
+import moment from 'moment';
+import getAge from '../helpers/getAge';
 
 
 const Employees = () => {
   const [loader, setLoader] = useState(true)
   const [employees, setEmployees] = useState(false)
+  const [searchedEmployee, setSearchedEmployee] = useState([])
   const [filterInput, setFilterInput] = useState('')
 
   useEffect(() => { getEmployees() }, [])
+  useEffect(() => {
+    // filter all post
+    employees.length && setSearchedEmployee(applayFilter(filterInput, employees))
+  }, [filterInput, employees])
   const naviget = useNavigate();
 
+  // get all employees
   const getEmployees = async () => {
     try {
       const data = await Api.get(ApiEndpoints.employee.getEmployees)
@@ -45,18 +53,34 @@ const Employees = () => {
       throw err
     }
   }
-
+  // search employee by first name, last name, and email
+  const applayFilter = (filterInput, dataSource) => {
+    if (dataSource.length && filterInput) {
+      const filteredData = dataSource.filter((data) => {
+        const first_name = data.first_name.toLowerCase()
+        const last_name = data.last_name.toLowerCase()
+        const email = data.email.toLowerCase()
+        filterInput = filterInput.toLowerCase()
+        if (first_name.includes(filterInput) ||
+          email.includes(filterInput) ||
+          last_name.includes(filterInput)) return true
+        return false
+      })
+      return filteredData
+    }
+    return dataSource
+  }
   // remove employee
-  const removeEmployee = async(id)=>{
-    try{
+  const removeEmployee = async (id) => {
+    try {
       const data = await Api.delete(`${ApiEndpoints.employee.removeEmployeeById}/${id}`)
-      if(data.data.success){
+      if (data.data.success) {
         toast.success('Employee removed')
         getEmployees()
       }
-    }catch(err){throw err}
+    } catch (err) { throw err }
   }
-  
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -76,11 +100,28 @@ const Employees = () => {
     },
   }));
 
+  // get age
+  // const getAge = (DOB) => {
+  //   const currentDate = moment().format('DD-MM-yyyy').split('-')
+  //   const convertDOB = moment(DOB).format('DD-MM-yyyy').split('-')
+  //   const year = parseInt(currentDate[2]) - parseInt(convertDOB[2])
+  //   const month = parseInt(currentDate[1]) - parseInt(convertDOB[1])
+  //   const day = parseInt(currentDate[0]) - parseInt(convertDOB[0])
+
+
+
+  //   //AGE MONTH DAYS
+
+
+  //   console.log(currentDate, convertDOB, year, month, day, 'aaaaaa');
+  //   return (`${year} years old`)
+  // }
   return (
     <>
-     
-<Container sx={{ mt: 2 }} maxWidth="false">
-        <ToastContainer/>
+      <SearchAppBar setValue={(v) => setFilterInput(v)} />
+      <Container sx={{ mt: 2 }} maxWidth="false">
+        <ToastContainer />
+
         <Typography variant="h4" align="center" sx={{ fontWeight: 'bold' }}>
           Employees
         </Typography>
@@ -88,7 +129,7 @@ const Employees = () => {
         <Box sx={{ display: 'flex' }}>
           <Box sx={{ flexGrow: 1 }} />
           <Button
-          onClick={() => {naviget(`/add`);}}
+            onClick={() => { naviget(`/add`); }}
 
             variant="contained"
             sx={{
@@ -159,74 +200,73 @@ const Employees = () => {
               </StyledTableRow>
             </TableHead>
             <TableBody>
-              {employees?.length
-               ? employees.map((employee, index) => ( 
-                <>             <StyledTableRow
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                
-                <StyledTableCell align="left">
-                {employee?.first_name?
-                  employee?.first_name.length>25
-                  ?`${employee?.first_name?.slice(0, 25)}....`
-                  :`${employee?.first_name} ${employee?.last_name}`
-                  :'-'}
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {employee?.email?employee?.email:'-'}
+              {searchedEmployee?.length
+                ? searchedEmployee.map((employee, index) => (
+                  <>             <StyledTableRow
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
 
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {employee?.employee_type?employee?.employee_type:'-'}
+                    <StyledTableCell align="left">
+                      {employee?.first_name ?
+                        employee?.first_name.length > 25
+                          ? `${employee?.first_name?.slice(0, 25)}....`
+                          : `${employee?.first_name} ${employee?.last_name}`
+                        : '-'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {employee?.email ? employee?.email : '-'}
 
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {employee?.DOB?
-                  employee?.DOB.length>25
-                  ?`${employee?.DOB?.slice(0, 25)}....`
-                  :`${employee?.DOB}`
-                  :'-'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {employee?.employee_type ? employee?.employee_type : '-'}
 
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                  {employee?.hobbies?
-                  employee?.hobbies.length>25
-                  ?`${employee?.hobbies?.slice(0, 20)}....`
-                  :`${employee?.hobbies}`
-                  :'-'}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {employee?.DOB ?
+                        getAge(employee?.DOB, moment().format())
 
-                </StyledTableCell>
-                <StyledTableCell
-                  align="center"
-                  sx={{ whiteSpace: 'nowrap' }}
-                >
-                  <Button>
-                    <EditIcon
-                      sx={{ m: 1 }}
-                      onClick={() => {naviget(`/employee/update/${employee?._id}`);}}
-                    />
-                  </Button>
-                  <Button>
-                  </Button>
-                  <Button>
-                    <DeleteIcon
-                      sx={{ m: 1, color: 'red' }}
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            'Are you sure you want to delete this employee?'
-                          )
-                        ) {
-                          removeEmployee(employee?._id);
-                        }
-                      }}
-                    />
-                  </Button>
-                </StyledTableCell>
-              </StyledTableRow>
-              </>
-              )) 
-               : 'No record found'}
+                        : '-'}
+
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
+                      {employee?.hobbies ?
+                        employee?.hobbies.length > 25
+                          ? `${employee?.hobbies?.slice(0, 20)}....`
+                          : `${employee?.hobbies}`
+                        : '-'}
+
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="center"
+                      sx={{ whiteSpace: 'nowrap' }}
+                    >
+                      <Button>
+                        <EditIcon
+                          sx={{ m: 1 }}
+                          onClick={() => { naviget(`/employee/update/${employee?._id}`); }}
+                        />
+                      </Button>
+                      <Button>
+                      </Button>
+                      <Button>
+                        <DeleteIcon
+                          sx={{ m: 1, color: 'red' }}
+                          onClick={() => {
+                            if (
+                              window.confirm(
+                                'Are you sure you want to delete this employee?'
+                              )
+                            ) {
+                              removeEmployee(employee?._id);
+                            }
+                          }}
+                        />
+                      </Button>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                  </>
+                ))
+                : 'No record found'}
             </TableBody>
           </Table>
         </TableContainer>
