@@ -1,0 +1,265 @@
+{
+	"id": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+	"name": "employee_management_system",
+	"description": "",
+	"order": [
+		"82b803c1-abec-8713-4c27-cb2979eb3c65",
+		"f3e1195f-c48f-ec16-73fa-74b21cc3c367",
+		"88c11ad7-85ed-a25b-3533-a5f158e463e6",
+		"a324decd-99d7-90ef-3a2d-816762734960",
+		"701531ce-7ff4-6f6a-d2c2-6ca4a2b2c429"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1667756560990,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "701531ce-7ff4-6f6a-d2c2-6ca4a2b2c429",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/getEmployeeById/636a1d3ab720f5445c70eb1e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": " profile_pic",
+					"value": "output1.png",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1668016574140,
+			"name": "get employee by id",
+			"description": "pass the employee id",
+			"collectionId": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+			"responses": []
+		},
+		{
+			"id": "82b803c1-abec-8713-4c27-cb2979eb3c65",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/getEmployees",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1668016548333,
+			"name": "getAllEmoloyees",
+			"description": "",
+			"collectionId": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+			"responses": []
+		},
+		{
+			"id": "88c11ad7-85ed-a25b-3533-a5f158e463e6",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/updateEmployeeById/636a1d3ab720f5445c70eb1e",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [
+				{
+					"key": "first_name",
+					"value": "yagnik",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "last_name",
+					"value": "viradiya",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "email",
+					"value": "yagnik1@gmail.com",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "employee_type",
+					"value": "WFO",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "DOB",
+					"value": "1999-10-31T18:30:00.000Z",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "hobbies",
+					"value": "[\"Java learning,CakePHP learning,Anguler learning,Node learning\"]",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": " profile_pic",
+					"value": "output2.png",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "fileurl",
+					"value": "",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1668016563753,
+			"name": "Update employee",
+			"description": "if profile not update then pass fileurl fild in old image url and not send profile_pic",
+			"collectionId": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+			"responses": []
+		},
+		{
+			"id": "a324decd-99d7-90ef-3a2d-816762734960",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:3000/removeEmployeeById/63688f88dd322b30581c8f51",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1668016568943,
+			"name": "remove employee by id",
+			"description": "pass the employee id",
+			"collectionId": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+			"responses": []
+		},
+		{
+			"id": "f3e1195f-c48f-ec16-73fa-74b21cc3c367",
+			"headers": "",
+			"headerData": [],
+			"url": "http://localhost:3000/createEmployee",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "last_name",
+					"value": "viradiya",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "email",
+					"value": "yagnik1234@gmail.com",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "employee_type",
+					"value": "WFO",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "DOB",
+					"value": "1999-10-31T18:30:00.000Z",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "hobbies",
+					"value": "[\"Java learning,CakePHP learning,Anguler learning,Node learning\"]",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "first_name",
+					"value": "yagnik",
+					"type": "text",
+					"enabled": true,
+					"description": ""
+				},
+				{
+					"key": "profile_pic",
+					"value": "Screenshot (3).png",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1668016537457,
+			"name": "Create employee",
+			"description": "",
+			"collectionId": "68f899a8-ce54-eca1-e44c-4d2fea483d34",
+			"responses": []
+		}
+	]
+}

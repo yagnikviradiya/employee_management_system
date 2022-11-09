@@ -4,7 +4,7 @@ import ImageUploading from 'react-images-uploading';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 const UploadFile = ({ images, setImages }) => {
-    const maxNumber = 69;
+    const maxNumber = 2;
     const onChange = (imageList, addUpdateIndex) => {
         setImages(imageList);
     };
@@ -15,6 +15,7 @@ const UploadFile = ({ images, setImages }) => {
                 onChange={onChange}
                 maxNumber={maxNumber}
                 dataURLKey="data_url"
+                acceptType={['jpg', 'gif', 'png']}
             >
                 {({
                     imageList,

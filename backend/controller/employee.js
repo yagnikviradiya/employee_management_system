@@ -132,7 +132,7 @@ const getEmployeeById = async (req, res) => {
 const removeEmployeeById = async (req, res) => {
     try {
         if (req?.params?.id) {
-            const removeEmployee = await employeeServices.removeEmployeeById(req.params.id)
+            const removeEmployee = await employeeServices.removeEmployeeById(req.params.id,res)
             res.status(200).json({
                 success: true,
                 data: null,

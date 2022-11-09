@@ -12,6 +12,7 @@ module.exports = function(validator) {
             next()
         } catch (err) {
             if(err.isJoi) 
+            console.log(err.message,'rr.messagerr.message');
             res.status(400).json({
                 success: false,
                 data: null,

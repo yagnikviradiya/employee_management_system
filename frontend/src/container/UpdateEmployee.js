@@ -129,7 +129,7 @@ const UpdateEmployee = () => {
     if (regExValidation.email(email)) {
       setEmployeeDetailsError(prev => ({ ...prev, email: '' }))
     } else {
-      setEmployeeDetailsError(prev => ({ ...prev, email: 'Please enter valid first name' }))
+      setEmployeeDetailsError(prev => ({ ...prev, email: 'Please enter valid email' }))
     }
     if (DOB) {
       if (IsAgeValid(DOB) == -1) {
