@@ -47,7 +47,6 @@ const Employees = () => {
       setLoader(false);
       if (data.data.success) {
         setEmployees(data.data.data)
-        console.log(data.data.data,'data.data.data');
         setSearchedEmployee(data.data.data)
       }
     } catch (err) {
@@ -102,22 +101,7 @@ const Employees = () => {
     },
   }));
 
-  // get age
-  // const getAge = (DOB) => {
-  //   const currentDate = moment().format('DD-MM-yyyy').split('-')
-  //   const convertDOB = moment(DOB).format('DD-MM-yyyy').split('-')
-  //   const year = parseInt(currentDate[2]) - parseInt(convertDOB[2])
-  //   const month = parseInt(currentDate[1]) - parseInt(convertDOB[1])
-  //   const day = parseInt(currentDate[0]) - parseInt(convertDOB[0])
-
-
-
-  //   //AGE MONTH DAYS
-
-
-  //   console.log(currentDate, convertDOB, year, month, day, 'aaaaaa');
-  //   return (`${year} years old`)
-  // }
+  
   return (
     <>
       <SearchAppBar setValue={(v) => setFilterInput(v)} />
