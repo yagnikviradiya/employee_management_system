@@ -1,4 +1,5 @@
+require('dotenv').config()
 
 module.exports = {
-    mongodbUrl: 'mongodb://localhost:27017/employee-management-system'
+    mongodbUrl: process.env.MONGODB_URL
 }
