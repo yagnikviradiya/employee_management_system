@@ -47,6 +47,8 @@ const Employees = () => {
       setLoader(false);
       if (data.data.success) {
         setEmployees(data.data.data)
+        console.log(data.data.data,'data.data.data');
+        setSearchedEmployee(data.data.data)
       }
     } catch (err) {
       setLoader(false);

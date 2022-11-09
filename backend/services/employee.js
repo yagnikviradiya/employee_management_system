@@ -4,10 +4,14 @@ const getAllEmployees = async (res) => {
     try {
         const employees = await Employees.find({ is_deleted: false }).sort({ createdAt: -1 })
         if (employees && employees?.length) {
-            return employees
+            return res.status(200).json({
+                success: true,
+                data: employees,
+                message: "get all employees"
+            });
         } else {
             res.status(200).json({
-                success: false,
+                success: true,
                 data: employees,
                 message: "not available any employee"
             })

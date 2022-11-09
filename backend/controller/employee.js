@@ -3,7 +3,7 @@ const employeeServices = require('../services/');
 //#region create employee 
 const createEmployee = async (req, res) => {
     try {
-        req.body.profile_pic=req.fileurl
+        req.body.profile_pic = req.fileurl
         let employee = await employeeServices.getEmployeeByKey({ is_deleted: false, email: req.body.email });
         if (employee) {
             return res.status(200).json({
@@ -11,21 +11,24 @@ const createEmployee = async (req, res) => {
                 data: null,
                 message: "employee already exist"
             })
+        } else {
+            const createEmployee = await employeeServices.createEmployee(req.body)
+            if (createEmployee) {
+                res.status(200).json({
+                    success: true,
+                    data: createEmployee,
+                    message: "employee created"
+                })
+            } else {
+                res.status(200).json({
+                    success: false,
+                    data: null,
+                    message: "error while creating employee"
+                })
+            }
         }
-        const createEmployee = await employeeServices.createEmployee(req.body)
-        if (createEmployee)
-            return res.status(200).json({
-                success: true,
-                data: createEmployee,
-                message: "employee created"
-            });
-        return res.status(200).json({
-            success: false,
-            data: null,
-            message: "error while creating employee"
-        })
     } catch (err) {
-        return res.status(500).json({
+        res.status(500).json({
             success: false,
             data: null,
             message: err.message
@@ -38,7 +41,7 @@ const createEmployee = async (req, res) => {
 const updateEmployeeById = async (req, res) => {
     try {
         if (req?.params?.id) {
-        req.body.profile_pic=req.fileurl
+            req.body.profile_pic = req.fileurl
             const filter = {
                 is_deleted: false,
                 _id: req.params.id
@@ -77,12 +80,8 @@ const updateEmployeeById = async (req, res) => {
 //#region get all employee 
 const getEmployees = async (req, res) => {
     try {
-        const employeeData = await employeeServices.getAllEmployees(res)
-        res.status(200).json({
-            success: true,
-            data: employeeData,
-            message: "get all employees"
-        });
+        await employeeServices.getAllEmployees(res)
+
     } catch (err) {
         return res.status(500).json({
             success: false,
@@ -104,7 +103,7 @@ const getEmployeeById = async (req, res) => {
                     data: employee,
                     message: "get employee"
                 });
-            }else{
+            } else {
                 res.status(200).json({
                     success: false,
                     data: null,

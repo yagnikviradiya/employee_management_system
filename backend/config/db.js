@@ -4,8 +4,9 @@ const { mongodbUrl } = require('./config');
 const mongodbConnection = async () => {
     try {
         await mongoose.connect(mongodbUrl, {
-            useCreateIndex: true,
-            useNewUrlParser: true 
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true
         });
         console.log('Database connected...');
     } catch (err) {
