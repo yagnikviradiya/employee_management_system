@@ -218,7 +218,7 @@ const UpdateEmployee = () => {
                 mb: '30px',
                 textAlign: 'center',
                 fontWeight: 'bold'
-              }}>ADD EMPLOYEE</Typography>
+              }}>UPDATE EMPLOYEE</Typography>
             <CardContent>
               <Box sx={{ mb: '30px' }}>
                 <TextField
